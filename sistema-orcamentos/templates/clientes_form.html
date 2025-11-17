@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar Cliente' if cliente else 'Novo Cliente' }} - Sistema de Orçamentos{% endblock %}
+
+{% block content %}
+<h1 class="h3 mb-3">{{ 'Editar Cliente' if cliente else 'Cadastro de Cliente' }}</h1>
+
+<form action="{{ url_for('atualizar_cliente', cliente_id=cliente.id) if cliente else url_for('criar_cliente') }}"
+      method="post" class="card p-3 shadow-sm">
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome *</label>
+        <input type="text" class="form-control" id="nome" name="nome" required
+               value="{{ cliente.nome if cliente else '' }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" name="email"
+               value="{{ cliente.email if cliente else '' }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="telefone" name="telefone"
+               value="{{ cliente.telefone if cliente else '' }}">
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="{{ url_for('listar_clientes') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
